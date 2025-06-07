@@ -27,6 +27,7 @@ function cleanup_containers() {
     sudo docker stop $(sudo docker ps -aq) 2>/dev/null
     sleep 1
     sudo docker rm -f $(sudo docker ps -aq) 2>/dev/null
+    sudo kill -9 $(pgrep bg-traffic) 2>/dev/null
 }
 
 # Function to pull and run Nginx Docker container
