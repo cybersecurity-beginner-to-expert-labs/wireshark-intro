@@ -34,8 +34,11 @@ function cleanup_containers() {
 function run_nginx_container() {
     echo "Pulling Nginx Docker image..."
     sudo docker pull nginx
+    echo -e "# Internal Use Only\nusername: testadmin\npassword: P@ssw0rd123!\ntoken: 9f35-ef91-ab12" > /tmp/credentials.txt
     echo "Running Nginx container in detached mode..."
-    sudo docker run -d --name nginx-container nginx
+    sudo docker run -d --name nginx-container \
+    -v /tmp/credentials.txt:/usr/share/nginx/html/credentials.txt \
+    nginx
 }
 
 # Main script logic
